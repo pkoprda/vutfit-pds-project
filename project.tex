@@ -1,0 +1,195 @@
+%==============================================================================
+% kodovani: UTF-8 (zmena prikazem iconv, recode nebo cstocs)
+% encoding: UTF-8 (you can change it by command iconv, recode or cstocs)
+%------------------------------------------------------------------------------
+% zpracování / processing: make, make pdf, make clean
+%==============================================================================
+
+\documentclass[english]{fitthesis}
+
+%---rm---------------
+\renewcommand{\rmdefault}{lmr}%zavede Latin Modern Roman jako rm / set Latin Modern Roman as rm
+%---sf---------------
+\renewcommand{\sfdefault}{qhv}%zavede TeX Gyre Heros jako sf
+%---tt------------
+\renewcommand{\ttdefault}{lmtt}% zavede Latin Modern tt jako tt
+
+% vypne funkci šablony, která automaticky nahrazuje uvozovky,
+% aby nebyly prováděny nevhodné náhrady v popisech API apod.
+% disables function of the template which replaces quotation marks
+% to avoid unnecessary replacements in the API descriptions etc.
+\csdoublequotesoff
+
+
+
+\usepackage{url}
+
+
+% =======================================================================
+% balíček "hyperref" vytváří klikací odkazy v pdf, pokud tedy použijeme pdflatex
+% problém je, že balíček hyperref musí být uveden jako poslední, takže nemůže
+% být v šabloně
+% "hyperref" package create clickable links in pdf if you are using pdflatex.
+% Problem is that this package have to be introduced as the last one so it 
+% can not be placed in the template file.
+\ifWis
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem / we are not using pdflatex
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
+  \definecolor{hrcolor-ref}{RGB}{223,52,30}
+  \definecolor{hrcolor-cite}{HTML}{2F8F00}
+  \definecolor{hrcolor-urls}{HTML}{092EAB}
+  \hypersetup{
+	linkcolor=hrcolor-ref,
+	citecolor=hrcolor-cite,
+	filecolor=magenta,
+	urlcolor=hrcolor-urls
+  }
+  \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajů kolem odkazů / without margins around links
+  \pdfcompresslevel=9
+\fi
+\else % pro tisk budou odkazy, na které se dá klikat, černé / for the print clickable links will be black
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem / we are not using pdflatex
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+  \definecolor{links}{rgb}{0,0,0}
+  \definecolor{anchors}{rgb}{0,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] } % bez okrajů kolem odkazů / without margins around links
+  \pdfcompresslevel=9
+\fi
+\fi
+% Řešení problému, kdy klikací odkazy na obrázky vedou za obrázek
+% This solves the problems with links which leads after the picture
+\usepackage[all]{hypcap}
+
+% Informace o práci/projektu / Information about the thesis
+%---------------------------------------------------------------------------
+\projectinfo{
+  %Prace / Thesis
+  project={SP},            %typ práce SP  / thesis type (SP = PDS project)
+  year={},             % rok odevzdání / year of submission
+  date={\today},             % datum odevzdání / submission date
+  %Nazev prace / thesis title
+  title.en={Log File Analysis and Anomaly Detection},
+  title.cs={Data Communications, Computer Networks and Protocols \--- Project},
+  title.length={14.5cm}, % nastavení délky bloku s titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a thesis title for adjusting a line break (can be defined here or below)
+  %sectitle.length={14.5cm}, % nastavení délky bloku s druhým titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a second thesis title for adjusting a line break (can be defined here or below)
+  %dectitle.length={14.5cm}, % nastavení délky bloku s titulkem nad prohlášením pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a thesis title above declaration for adjusting a line break (can be defined here or below)
+  %Autor / Author
+  author.name={Peter},   % jméno autora / author name
+  author.surname={Koprda},   % příjmení autora / author surname 
+  author.title.p={Bc.}, % titul před jménem (nepovinné) / title before the name (optional)
+  %author.title.a={Ph.D.}, % titul za jménem (nepovinné) / title after the name (optional)
+  %faculty={FIT}, % FIT/FEKT/FSI/FA/FCH/FP/FAST/FAVU/USI/DEF
+  faculty.cs={Fakulta informačních technologií}, % Fakulta v češtině - pro využití této položky výše zvolte fakultu DEF / Faculty in Czech - for use of this entry select DEF above
+  faculty.en={Faculty of Information Technology}, % Fakulta v angličtině - pro využití této položky výše zvolte fakultu DEF / Faculty in English - for use of this entry select DEF above
+}
+
+
+% nastavení délky bloku s titulkem pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a thesis title for adjusting a line break - can be defined here or above
+%\titlelength{14.5cm}
+% nastavení délky bloku s druhým titulkem pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a second thesis title for adjusting a line break - can be defined here or above
+%\sectitlelength{14.5cm}
+% nastavení délky bloku s titulkem nad prohlášením pro úpravu zalomení řádku - lze definovat zde nebo výše / setting the length of a block with a thesis title above declaration for adjusting a line break - can be defined here or above
+%\dectitlelength{14.5cm}
+
+% řeší první/poslední řádek odstavce na předchozí/následující stránce
+% solves first/last row of the paragraph on the previous/next page
+\clubpenalty=10000
+\widowpenalty=10000
+
+% checklist
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$}
+
+% Nechcete-li, aby se u oboustranného tisku roztahovaly mezery pro zaplnění stránky, odkomentujte následující řádek / If you do not want enlarged spacing for filling of the pages in case of duplex printing, uncomment the following line
+% \raggedbottom
+
+\begin{document}
+  % Vysazeni titulnich stran / Typesetting of the title pages
+  % ----------------------------------------------
+  \maketitle
+  % Obsah
+  % ----------------------------------------------
+  \setlength{\parskip}{0pt}
+
+  {\hypersetup{hidelinks}\tableofcontents}
+  
+
+  \ifODSAZ
+    \setlength{\parskip}{0.5\bigskipamount}
+  \else
+    \setlength{\parskip}{0pt}
+  \fi
+
+  % vynechani stranky v oboustrannem rezimu
+  % Skip the page in the two-sided mode
+  \iftwoside
+    \cleardoublepage
+  \fi
+
+  % Text prace / Thesis text
+  % ----------------------------------------------
+  \input{project-pds-chapters}
+  
+  % Kompilace po částech (viz výše, nutno odkomentovat)
+  % Compilation piecewise (see above, it is necessary to uncomment it)
+  %\subfile{projekt-01-uvod-introduction}
+  % ...
+  %\subfile{chapters/projekt-05-conclusion}
+
+
+  % Pouzita literatura / Bibliography
+  % ----------------------------------------------
+\ifslovak
+  \makeatletter
+  \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatúra}}
+  \makeatother
+  \bibliographystyle{bib-styles/Pysny/skplain}
+\else
+  \ifczech
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatura}}
+    \makeatother
+    \bibliographystyle{bib-styles/Pysny/czplain}
+  \else 
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Bibliography}}
+    \makeatother
+    \bibliographystyle{bib-styles/Pysny/enplain}
+  %  \bibliographystyle{alpha}
+  \fi
+\fi
+  \begin{flushleft}
+  \bibliography{project-pds-bibliography}
+  \end{flushleft}
+
+  % vynechani stranky v oboustrannem rezimu
+  % Skip the page in the two-sided mode
+  \iftwoside
+    \cleardoublepage
+  \fi
+
+
+% vynechani stranky v oboustrannem rezimu
+% Skip the page in the two-sided mode
+%\iftwoside
+%  \cleardoublepage
+%\fi
+  
+  \ifODSAZ
+    \setlength{\parskip}{0.5\bigskipamount}
+  \else
+    \setlength{\parskip}{0pt}
+  \fi
+  
+  % vynechani stranky v oboustrannem rezimu
+  \iftwoside
+    \cleardoublepage
+  \fi
+  
+\end{document}
