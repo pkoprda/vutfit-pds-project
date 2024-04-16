@@ -183,29 +183,29 @@ STRINGS { s t u }
 %%%%%%%%%%%% DEFINITION OF ABBREVIATIONS -- ENGLISH NAMES OF MONTHS %%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-MACRO {jan} {"january"}
+MACRO {jan} {"January"}
 
-MACRO {feb} {"february"}
+MACRO {feb} {"February"}
 
-MACRO {mar} {"march"}
+MACRO {mar} {"March"}
 
-MACRO {apr} {"april"}
+MACRO {apr} {"April"}
 
-MACRO {may} {"may"}
+MACRO {may} {"May"}
 
-MACRO {jun} {"june"}
+MACRO {jun} {"June"}
 
-MACRO {jul} {"july"}
+MACRO {jul} {"July"}
 
-MACRO {aug} {"august"}
+MACRO {aug} {"August"}
 
-MACRO {sep} {"september"}
+MACRO {sep} {"September"}
 
-MACRO {oct} {"october"}
+MACRO {oct} {"October"}
 
-MACRO {nov} {"november"}
+MACRO {nov} {"November"}
 
-MACRO {dec} {"december"}
+MACRO {dec} {"December"}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% SLIGHTLY EDITED FUNCTIONS TAKEN FROM plain.bst %%%%%%%%%%%%%%%%
@@ -876,29 +876,29 @@ FUNCTION {cz.name.format}
 % }
 FUNCTION {get.month.n}
 { duplicate$ #1 =
-  { "january" swap$ pop$ }
+  { "January" swap$ pop$ }
   { duplicate$ #2 =
-    { "february" swap$ pop$ }
+    { "February" swap$ pop$ }
     { duplicate$ #3 =
-      { "march" swap$ pop$ }
+      { "March" swap$ pop$ }
       { duplicate$ #4 =
-        { "april" swap$ pop$ }
+        { "April" swap$ pop$ }
         { duplicate$ #5 =
-          { "may" swap$ pop$ }
+          { "May" swap$ pop$ }
           { duplicate$ #6 =
-            { "june" swap$ pop$ }
+            { "June" swap$ pop$ }
             { duplicate$ #7 =
-              { "july" swap$ pop$ }
+              { "July" swap$ pop$ }
               { duplicate$ #8 =
-                { "august" swap$ pop$ }
+                { "August" swap$ pop$ }
                 { duplicate$ #9 =
-                  { "september" swap$ pop$ }
+                  { "September" swap$ pop$ }
                   { duplicate$ #10 =
-                    { "october" swap$ pop$ }
+                    { "October" swap$ pop$ }
                     { duplicate$ #11 =
-                      { "november" swap$ pop$ }
+                      { "November" swap$ pop$ }
                       { duplicate$ #12 =
-                        { "december" swap$ pop$ }
+                        { "December" swap$ pop$ }
                         { "" "Month must be between 1 and 12!" warning$ }
                         if$
                       }
