@@ -7,7 +7,7 @@
 ### How to install and run this tool:
 Requirements:
 - python3
-- pip
+- pip3
 
 Install dependencies:
 ```
