@@ -180,7 +180,11 @@ if __name__ == '__main__':
 
     # Create the event count matrix
     df_test_events = create_log_events(df_test)
-    X_test = create_event_count_matrix(df_test_events, testing_model=True).drop(columns=['DateTime'])
+    X_test = create_event_count_matrix(df_test_events, testing_model=True)
+    
+    # DateTime list will be used for the output
+    X_datetimes = X_test['DateTime'].tolist()
+    X_test = X_test.drop(columns=['DateTime'])
 
     # Normalize the data using Min-Max scaling
     X_test[X_test.columns] = scaler.fit_transform(X_test[X_test.columns])
@@ -189,5 +193,5 @@ if __name__ == '__main__':
     anomalies, anomaly_scores = detect_anomalies(model, X_test, args.threshold)
 
     # Print or process the anomalies and their scores as needed
-    for anomaly, score in zip(anomalies, anomaly_scores):
-        print(f"Anomaly score of {anomaly}: {score}")
+    for datetime, score in zip(X_datetimes, anomaly_scores):
+        print(f"Anomaly score of {datetime}: {score}")
