@@ -113,7 +113,7 @@ def get_time_window():
   return pd.Timedelta('1 day')
 
 def create_event_count_matrix(df, testing_model=False):
-  event_counts = df.groupby(['Content', 'Level'], observed=False).apply(lambda x: x.set_index('DateTime').resample(get_time_window()).size(), include_groups=False)
+  event_counts = df.groupby(['Content', 'Level'], observed=False).apply(lambda x: x.set_index('DateTime').resample(get_time_window()).size())
 
   # Convert the Series to a DataFrame
   event_counts_df = event_counts.to_frame(name='Count')
